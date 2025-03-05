@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Barbershop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="hero">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="logo.jpg" alt="BarberPro Logo">
+                <span>BarberPro</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Artists</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        </nav>
+        
+    
+        <div class="hero-content">
+            <h1>Perfect Look</h1>
+            <p>Keep your perfect look with our professional barbers.</p>
+            <a href="#" class="btn">Book Appointment</a>
+        </div>
+    </header>
+    
+
+<section class="about">
+    <div class="about-text">
+        <h2>Amazing Things Come from Passion</h2>
+        <p>
+            At our barbershop, passion meets precision. We take pride in delivering the ultimate grooming experience, combining premium tools, top-quality products, and the expertise of highly skilled barbers. Whether it’s a fresh cut, a clean shave, or a personalized style, we ensure every detail reflects your unique personality — because great style starts with passion
+            
+            We offer the best barber experience using premium tools and experienced barbers.</p>
+    </div>
+    <div class="about-image">
+        <img src="model.jpeg" alt="About Image">
+    </div>
+</section>
+
+<section class="services">
+    <h2>Our Services</h2>
+    <div class="service-cards">
+        <div class="card">Haircut & Style</div>
+        <div class="card">Beard Trim</div>
+        <div class="card">Shave & Relax</div>
+        <div class="card">Kids Haircut</div>
+    </div>
+</section>
+
+<section class="gallery">
+    <h2>Our Works</h2>
+    <div class="gallery-grid">
+        <img src="work1.jpeg" alt="">
+        <img src="work2.jpeg" alt="">
+        <img src="work3.jpeg" alt="">
+        <img src="work4.jpeg" alt="">
+    </div>
+</section>
+
+<section class="pricing" id="pricing">
+    <h2>OUR PRICING</h2>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+
+    <div class="pricing-container">
+        <!-- Left Package List -->
+        <div class="package">
+            <h3>PACKAGE</h3>
+            <ul class="package-list">
+                <li>Haircut & Blowdry</li>
+                <li>Sleek and Shiny</li>
+                <li>Shampoo & Set with Haircut</li>
+                <li>Hair Treatment</li>
+                <li>Face mask</li>
+                <li>Dimensional Color with Haircut</li>
+            </ul>
+        </div>
+
+        <!-- Pricing Table -->
+        <div class="pricing-table">
+            <div class="plan">
+                <h4>GOLD</h4>
+                <p class="price">$ 69.99</p>
+                <ul>
+                    <li>✔️</li>
+                    <li>✔️</li>
+                    <li>✔️</li>
+                    <li>✔️</li>
+                    <li>❌</li>
+                    <li>❌</li>
+                </ul>
+            </div>
+            <div class="plan highlight">
+                <h4>DIAMOND</h4>
+                <p class="price">$ 169.99</p>
+                <ul>
+                    <li>✔️</li>
+                    <li>✔️</li>
+                    <li>✔️</li>
+                    <li>✔️</li>
+                    <li>✔️</li>
+                    <li>✔️</li>
+                </ul>
+            </div>
+            <div class="plan">
+                <h4>STANDARD</h4>
+                <p class="price">$ 99.99</p>
+                <ul>
+                    <li>✔️</li>
+                    <li>✔️</li>
+                    <li>✔️</li>
+                    <li>✔️</li>
+                    <li>❌</li>
+                    <li>✔️</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="appointment">
+    <h2>Book an Appointment</h2>
+    <form>
+        <input type="text" placeholder="Name">
+        <input type="email" placeholder="Email">
+        <input type="date">
+        <button type="submit">Book Now</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2025 BarberPro | All Rights Reserved</p>
+</footer>
+
+<script>
+    function toggleMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>
