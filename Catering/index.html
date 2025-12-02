@@ -1,161 +1,180 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
+<html lang="id"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CateringKu - Catering & Makanan</title>
+    <title>Catering Jakarta</title>
+
+    <!-- Font sesuai Brand Guideline -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Super+Senior:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <!-- Header -->
     <header class="header">
         <nav class="nav">
-            <div class="logo">CateringKu</div>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
+          <div class="logo"><a href="#home">CateringKu</a></div>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="#about">About</a></li>
-                <li><a href="#menu-utama">Menu Catering Utama</a></li>
                 <li><a href="#menu-details">Menu Details</a></li>
                 <li><a href="#corporate">Corporate</a></li>
                 <li><a href="#info-pemesanan">Info Pemesanan</a></li>
                 <li><a href="#faq">FAQ</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <!-- <li><a href="#contact">Contact -->
             </ul>
-            <div class="hamburger">☰</div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>   
+            </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Selamat Datang di CateringKu</h1>
-            <p>Layanan catering berkualitas untuk acara Anda. Segera pesan menu favorit!</p>
-            <button class="cta-button">Pesan Sekarang</button>
+        <div class="hero-content" data-aos="fade-down" data-aos-duration="1000">
+            <h1>Selamat Datang di What I Eat</h1>
+            <p>Gluten-free Western meal box yang sehat, lezat, dan terpercaya.<br>Setiap suapan terasa ringan, segar, dan penuh perhatian.</p>
+            <button class="cta-button" data-aos="zoom-in" data-aos-delay="600">Pesan Sekarang</button>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- About -->
+    <section id="about" class="about" data-aos="fade-up">
         <h2>Tentang Kami</h2>
-        <p>CateringKu adalah penyedia jasa catering terpercaya di Indonesia, fokus pada makanan sehat dan lezat untuk berbagai acara. Didirikan pada 2020, kami telah melayani ribuan pelanggan dengan komitmen kualitas terbaik.</p>
+        <p>CateringKu adalah penyedia jasa catering terpercaya di Jakarta sejak 2020. Kami fokus pada makanan sehat, lezat, dan higienis untuk berbagai acara — dari nasi box harian hingga buffet mewah.</p>
     </section>
 
-    <!-- Menu Catering Utama Section -->
+    <!-- Menu Utama -->
     <section id="menu-utama" class="services">
-        <h2>Menu Catering Utama</h2>
+        <h2 data-aos="fade-up">Menu Catering Utama</h2>
         <div class="services-grid">
-            <div class="service-card">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                 <h3>Nasi Box</h3>
-                <p>Nasi dengan lauk-pauk lengkap, ideal untuk acara harian.</p>
+                <p>Nasi dengan lauk lengkap, cocok untuk acara harian, seminar, atau kantoran.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                 <h3>Buffet</h3>
-                <p>Menu self-service mewah untuk pesta besar.</p>
+                <p>Menu prasmanan lengkap untuk pesta pernikahan, ulang tahun, dan gathering besar.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
                 <h3>Snack Box</h3>
-                <p>Camilan ringan untuk rapat atau event kecil.</p>
+                <p>Camilan premium untuk rapat, coffee break, atau acara santai.</p>
             </div>
         </div>
     </section>
 
-    <!-- Menu Details Section -->
+    <!-- Menu Details -->
     <section id="menu-details" class="about">
-        <h2>Menu Details</h2>
-        <div class="menu-list">
+        <h2 data-aos="fade-up">Contoh Menu & Harga</h2>
+        <div class="menu-list" data-aos="fade-up" data-aos-delay="200">
             <ul>
-                <li><strong>Nasi Goreng Spesial:</strong> Rp 25.000/porsi - Nasi goreng dengan ayam dan sayur.</li>
-                <li><strong>Soto Ayam:</strong> Rp 20.000/porsi - Kuah bening dengan ayam suwir.</li>
-                <li><strong>Tumpeng Mini:</strong> Rp 150.000/set - Untuk ulang tahun atau perayaan.</li>
-                <!-- Add more items as needed -->
+                <li><strong>Nasi Goreng Spesial</strong> — Rp 25.000/porsi</li>
+                <li><strong>Soto Ayam Komplit</strong> — Rp 20.000/porsi</li>
+                <li><strong>Ayam Bakar Taliwang</strong> — Rp 32.000/porsi</li>
+                <li><strong>Tumpeng Mini (8 porsi)</strong> — Rp 350.000/set</li>
+                <li><strong>Snack Box Premium</strong> — Rp 35.000/box</li>
             </ul>
-            <p>Harga dapat berubah; hubungi kami untuk update terbaru.</p>
+            <p>Harga dapat berubah sewaktu-waktu. Hubungi kami untuk daftar menu terlengkap!</p>
         </div>
     </section>
 
-    <!-- Corporate Section -->
+    <!-- Corporate -->
     <section id="corporate" class="services">
-        <h2>Corporate (Khusus Kantoran)</h2>
-        <p>Layanan catering khusus untuk kantor: lunch box harian, coffee break, dan event team building. Hemat waktu dan biaya dengan paket bulanan.</p>
+        <h2 data-aos="fade-up">Layanan Corporate</h2>
+        <p data-aos="fade-up" data-aos-delay="100">Solusi catering rutin untuk kantor Anda — hemat, praktis, dan variasi menu setiap hari.</p>
         <div class="services-grid">
-            <div class="service-card">
-                <h3>Lunch Harian</h3>
-                <p>Pengiriman pagi untuk karyawan.</p>
+            <div class="service-card" data-aos="flip-left" data-aos-delay="100">
+                <h3>Lunch Box Harian</h3>
+                <p>Pengantaran tepat waktu setiap hari kerja.</p>
             </div>
-            <div class="service-card">
-                <h3>Event Kantor</h3>
-                <p>Menu custom untuk meeting besar.</p>
+            <div class="service-card" data-aos="flip-right" data-aos-delay="300">
+                <h3>Coffee Break & Event</h3>
+                <p>Menu khusus rapat, seminar, atau gathering perusahaan.</p>
             </div>
         </div>
     </section>
 
-    <!-- Info Pemesanan Section -->
+    <!-- Info Pemesanan -->
     <section id="info-pemesanan" class="about">
-        <h2>Info Pemesanan - Pembayaran - Pengantaran</h2>
+        <h2 data-aos="fade-up">Info Pemesanan</h2>
         <div class="info-grid">
-            <div class="info-card">
+            <div class="info-card" data-aos="fade-right" data-aos-delay="100">
                 <h3>Pemesanan</h3>
-                <p>Minimum order 20 porsi. Pesan via WhatsApp atau form online, minimal 2 hari sebelum acara.</p>
+                <p>Min. 20 porsi • H-2 sebelum acara • Via WhatsApp / Form</p>
             </div>
-            <div class="info-card">
+            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
                 <h3>Pembayaran</h3>
-                <p>Transfer bank (BCA/Mandiri) atau e-wallet (GoPay/OVO). DP 50% untuk order besar.</p>
+                <p>Transfer BCA/Mandiri • GoPay/OVO • DP 50% untuk order >200 porsi</p>
             </div>
-            <div class="info-card">
+            <div class="info-card" data-aos="fade-left" data-aos-delay="300">
                 <h3>Pengantaran</h3>
-                <p>Gratis di Jakarta Pusat (min. 50 porsi). Biaya tambahan untuk luar area: Rp 5.000/km.</p>
+                <p>Gratis Jakarta Pusat (min. 50 porsi) • Luar area Rp 5.000/km</p>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- FAQ -->
     <section id="faq" class="faq">
-        <h2>FAQ</h2>
-        <div class="faq-item">
-            <h3>Apa syarat minimum order?</h3>
-            <p>20 porsi untuk menu utama.</p>
+        <h2 data-aos="fade-up">Frequently Asked Questions</h2>
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+            <h3>Berapa minimum order?</h3>
+            <p>20 porsi untuk semua jenis menu (kecuali tumpeng).</p>
         </div>
-        <div class="faq-item">
-            <h3>Bisakah custom menu?</h3>
-            <p>Ya, untuk order corporate atau acara khusus.</p>
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+            <h3>Bisa custom menu?</h3>
+            <p>Bisa! Khusus corporate atau acara besar (min. 100 porsi).</p>
         </div>
-        <!-- Add more FAQs -->
+        <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+            <h3>Apakah ada menu vegetarian/halal?</h3>
+            <p>Semua menu 100% halal. Menu vegetarian tersedia atas permintaan.</p>
+        </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2>Contact</h2>
-        <p>Hubungi kami: <a href="tel:+62211234567">+62 21 1234 5678</a> | <a href="mailto:info@CateringKu.com">info@CateringKu.com</a></p>
-        <form class="contact-form">
+    <!-- Contact -->
+    <!-- <section id="contact" class="contact">
+        <h2 data-aos="fade-up">Hubungi Kami</h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+            <a href="tel:+62211234567">+62 21 1234 5678</a> • 
+            <a href="mailto:info@cateringku.com">info@cateringku.com</a>
+        </p>
+        <form class="contact-form" data-aos="fade-up" data-aos-delay="300">
             <input type="text" placeholder="Nama Anda" required>
             <input type="email" placeholder="Email" required>
-            <textarea placeholder="Pesan" required></textarea>
-            <button type="submit">Kirim</button>
+            <input type="tel" placeholder="No. WhatsApp" required>
+            <textarea placeholder="Pesan / Detail Pesanan" rows="5" required></textarea>
+            <button type="submit">Kirim Pesan</button>
         </form>
-    </section>
+    </section> -->
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2025 CateringKu. All rights reserved. | Jakarta, Indonesia</p>
+        <p>&copy; 2025 CateringKu Jakarta. All rights reserved.</p>
     </footer>
 
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Smooth scrolling for nav links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+        AOS.init({ duration: 400, easing: 'ease', once: true, offset: 80 });
+
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
 
-        // Mobile hamburger menu (basic toggle)
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
         });
     </script>
 </body>
