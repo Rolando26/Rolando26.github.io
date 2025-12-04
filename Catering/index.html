@@ -2,8 +2,7 @@
 <html lang="id"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catering Jakarta</title>
-
+    <title>What I Eat</title>
     <!-- Font sesuai Brand Guideline -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Super+Senior:wght@700;800;900&display=swap" rel="stylesheet">
 
@@ -18,7 +17,10 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav">
-          <div class="logo"><a href="#home">CateringKu</a></div>
+          <!-- <div class="logo"><a href="#home">What <br>I Eat</a></div> -->
+          <div class="logo">
+            <img src="logo.png" alt="Logo What I Eat" width="60%">
+          </div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#about">About</a></li>
                 <li><a href="#menu-details">Menu Details</a></li>
@@ -38,7 +40,7 @@
     <!-- Hero -->
     <section id="home" class="hero">
         <div class="hero-content" data-aos="fade-down" data-aos-duration="1000">
-            <h1>Selamat Datang di CateringKu</h1>
+            <h1>What I Eat</h1>
             <p>Gluten-free Western meal box yang sehat, lezat, dan terpercaya.<br>Setiap suapan terasa ringan, segar, dan penuh perhatian.</p>
             <button class="cta-button" data-aos="zoom-in" data-aos-delay="600">Pesan Sekarang</button>
         </div>
@@ -120,21 +122,62 @@
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="faq">
-        <h2 data-aos="fade-up">Frequently Asked Questions</h2>
-        <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
-            <h3>Berapa minimum order?</h3>
-            <p>20 porsi untuk semua jenis menu (kecuali tumpeng).</p>
+<!-- FAQ -->
+<section id="faq" class="faq">
+    <h2 data-aos="fade-up">Frequently Asked Questions</h2>
+    
+    <div class="faq-container" data-aos="fade-up" data-aos-delay="100">
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Apakah semua menu gluten-free?</h3>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Ya, 100% gluten-free! Kami menggunakan bahan-bahan premium yang aman untuk penderita celiac dan yang ingin hidup lebih sehat.</p>
+            </div>
         </div>
-        <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
-            <h3>Bisa custom menu?</h3>
-            <p>Bisa! Khusus corporate atau acara besar (min. 100 porsi).</p>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Berapa minimum order?</h3>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Minimum order hanya 10 box untuk area Jakarta. Untuk luar Jakarta minimal 20 box (free ongkir untuk order >50 box).</p>
+            </div>
         </div>
-        <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
-            <h3>Apakah ada menu vegetarian/halal?</h3>
-            <p>Semua menu 100% halal. Menu vegetarian tersedia atas permintaan.</p>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Bisa custom menu sesuai request?</h3>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Tentu bisa! Khusus untuk corporate atau acara spesial, kami bisa buatkan menu sesuai keinginan (low-carb, keto, vegan, dll).</p>
+            </div>
         </div>
-    </section>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Apakah ada menu vegetarian/vegan?</h3>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Ada! Kami punya pilihan vegetarian dan full vegan. Bisa dicek di menu details atau langsung chat kami ya.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <h3>Kapan paling lambat harus pesan?</h3>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>H-1 sebelum jam 15.00 sudah harus confirm. Untuk order mendadak (same day) bisa hubungi kami dulu, kalau masih ada slot kami layani kok!</p>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- Contact -->
     <!-- <section id="contact" class="contact">
@@ -154,10 +197,10 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2025 CateringKu Jakarta. All rights reserved.</p>
+        <p>&copy; 2025 What I Eat Jakarta. All rights reserved.</p>
     </footer>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 400, easing: 'ease', once: true, offset: 80 });
 
@@ -174,6 +217,20 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
+            });
+        });
+
+        // FAQ
+        // FAQ Accordion – Smooth & On-Brand
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+                
+                // Close other open items (optional – kalau mau satu aja yang buka)
+                document.querySelectorAll('.faq-item').forEach(other => {
+                    if (other !== parent) other.classList.remove('active');
+                });
             });
         });
     </script>
