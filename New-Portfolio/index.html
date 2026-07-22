@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rolando — Web Developer</title>
+  <meta name="description" content="Rolando is a web developer and IT graduate based in Tangerang, Indonesia. He builds clean, reliable, user-friendly websites with HTML, CSS, JavaScript, PHP and Laravel." />
+  <meta name="author" content="Rolando" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Rolando — Web Developer" />
+  <meta property="og:description" content="Web developer building practical, user-friendly websites. HTML · CSS · JavaScript · PHP · Laravel." />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Favicon: inline SVG monogram -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2317140F'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='58' fill='%23E0522B' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Grain / paper texture overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Skip link for accessibility -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="top">
+    <div class="wrap header-inner">
+      <a href="#top" class="brand" aria-label="Rolando — home">
+        <span class="brand-mark">R</span>
+        <span class="brand-name">Rolando</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Switch color theme" title="Switch theme">
+          <span class="theme-toggle-track"><span class="theme-toggle-thumb"></span></span>
+        </button>
+        <a href="#contact" class="btn btn-sm btn-ink">Let's talk</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav aria-label="Mobile">
+      <a href="#work"><span class="mm-num">01</span> Work</a>
+      <a href="#about"><span class="mm-num">02</span> About</a>
+      <a href="#skills"><span class="mm-num">03</span> Skills</a>
+      <a href="#experience"><span class="mm-num">04</span> Experience</a>
+      <a href="#contact"><span class="mm-num">05</span> Contact</a>
+    </nav>
+    <div class="mobile-menu-foot">
+      <a href="mailto:andorolandowork@gmail.com">andorolandowork@gmail.com</a>
+    </div>
+  </div>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow reveal">
+          <span class="status-dot" aria-hidden="true"></span>
+          Available for work · Remote / ID
+        </p>
+
+        <h1 class="hero-title">
+          <span class="line reveal">Hi, I'm Rolando —</span>
+          <span class="line reveal">I build <em>clean</em>, <span class="hl">reliable</span></span>
+          <span class="line reveal">websites <span class="serif-thin">built to last.</span></span>
+        </h1>
+
+        <div class="hero-bottom">
+          <p class="lede reveal">
+            Information Technology graduate from Bunda Mulia University (GPA 3.80/4.00).
+            I design and develop responsive websites and web apps with HTML, CSS,
+            JavaScript, PHP &amp; Laravel — focused on clear communication and work that ships.
+          </p>
+          <div class="hero-cta reveal">
+            <a href="#work" class="btn btn-accent">
+              View selected work
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="#contact" class="btn btn-line">Get in touch</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills marquee -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>HTML</span><span class="dot">·</span><span>CSS</span><span class="dot">·</span><span>JavaScript</span><span class="dot">·</span><span>PHP</span><span class="dot">·</span><span>Laravel</span><span class="dot">·</span><span>MySQL</span><span class="dot">·</span><span>React Native</span><span class="dot">·</span><span>Responsive UI</span><span class="dot">·</span><span>Smart Contracts</span><span class="dot">·</span>
+          <span>HTML</span><span class="dot">·</span><span>CSS</span><span class="dot">·</span><span>JavaScript</span><span class="dot">·</span><span>PHP</span><span class="dot">·</span><span>Laravel</span><span class="dot">·</span><span>MySQL</span><span class="dot">·</span><span>React Native</span><span class="dot">·</span><span>Responsive UI</span><span class="dot">·</span><span>Smart Contracts</span><span class="dot">·</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SELECTED WORK ============ -->
+    <section class="section" id="work">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <span class="section-num">01</span>
+          <h2 class="section-title">Selected work</h2>
+          <p class="section-sub">A few projects I've designed and shipped — from company profiles to a full rental web app.</p>
+        </header>
+
+        <div class="projects">
+          <!-- Project 1 -->
+          <article class="project reveal">
+            <div class="project-media" data-label="Website">
+              <a href="https://whatieat.id" target="_blank" rel="noopener" class="browser browser--link">
+                <div class="browser-bar"><span></span><span></span><span></span></div>
+                <div class="browser-body browser-body--screenshot">
+                  <img src="assets/whatieat-preview.png" alt="Whatieat.id preview" />
+                </div>
+              </a>
+            </div>
+            <div class="project-info">
+              <div class="project-top">
+                <span class="project-year">2026</span>
+                <span class="project-role">Freelance Web Developer</span>
+              </div>
+              <h3 class="project-name">Whatieat.id — Food Sales Site</h3>
+              <p class="project-client">Whatieat.id · Jakarta</p>
+              <p class="project-desc">
+                A responsive company website for online food sales. I designed and built a
+                user-friendly interface to improve browsing and ordering, plus product
+                display and interaction features that support day-to-day sales.
+              </p>
+              <ul class="tags">
+                <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Responsive</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project reveal">
+            <div class="project-media" data-label="Web App">
+              <a href="https://rolando26.github.io/Aplikasi%20Pengeloaan%20Kendaraan/index.html" target="_blank" rel="noopener" class="browser browser--link">
+                <div class="browser-bar"><span></span><span></span><span></span></div>
+                <div class="browser-body browser-body--screenshot">
+                  <img src="assets/vs.png" alt="Vehicle Rental System preview" />
+                </div>
+              </a>
+            </div>
+            <div class="project-info">
+              <div class="project-top">
+                <span class="project-year">2022</span>
+                <span class="project-role">Web Developer</span>
+              </div>
+              <h3 class="project-name">Vehicle Rental System</h3>
+              <p class="project-client">Cinta Kasih Tzu Chi School</p>
+              <p class="project-desc">
+                A web app that streamlines vehicle rentals end to end: an online request
+                form, a live vehicle catalogue, applicant tracking, and an automatic
+                approval/rejection flow that routes accepted requests straight to a print menu.
+              </p>
+              <ul class="tags">
+                <li>PHP</li><li>MySQL</li><li>JavaScript</li><li>Workflow</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project reveal">
+            <div class="project-media" data-label="Personal Project">
+              <a href="https://rolando26.github.io/restaurant/index.html" target="_blank" rel="noopener" class="browser browser--link">
+                <div class="browser-bar"><span></span><span></span><span></span></div>
+                <div class="browser-body browser-body--screenshot">
+                  <img src="assets/resto.png" alt="Restaurant Website preview" />
+                </div>
+              </a>
+            </div>
+            <div class="project-info">
+              <div class="project-top">
+                <span class="project-year">2025</span>
+                <span class="project-role">Personal Project</span>
+              </div>
+              <h3 class="project-name">Restaurant Website</h3>
+              <p class="project-client">Personal Project</p>
+              <p class="project-desc">
+                A modern restaurant website featuring a menu display, clean layout, and
+                interactive elements to create an appealing dining experience online.
+              </p>
+              <ul class="tags">
+                <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Responsive</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project reveal">
+            <div class="project-media" data-label="Personal Project">
+              <a href="https://rolando26.github.io/BarberShop-Web/" target="_blank" rel="noopener" class="browser browser--link">
+                <div class="browser-bar"><span></span><span></span><span></span></div>
+                <div class="browser-body browser-body--screenshot">
+                  <img src="assets/barber.png" alt="Barber Pro preview" />
+                </div>
+              </a>
+            </div>
+            <div class="project-info">
+              <div class="project-top">
+                <span class="project-year">2025</span>
+                <span class="project-role">Personal Project</span>
+              </div>
+              <h3 class="project-name">Barber Website</h3>
+              <p class="project-client">Barber Pro</p>
+              <p class="project-desc">
+                A clean and modern barbershop website built and published as a personal
+                project. Features service listings, a sleek layout, and a responsive
+                design to showcase the brand.
+              </p>
+              <ul class="tags">
+                <li>HTML</li><li>CSS</li><li>Responsive</li><li>UI</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project reveal">
+            <div class="project-media" data-label="Personal Project">
+              <a href="https://rolando26.github.io/AI-For-Entrepreneur/index.html" target="_blank" rel="noopener" class="browser browser--link">
+                <div class="browser-bar"><span></span><span></span><span></span></div>
+                <div class="browser-body browser-body--screenshot">
+                  <img src="assets/ai.png" alt="AI for Entrepreneurs preview" />
+                </div>
+              </a>
+            </div>
+            <div class="project-info">
+              <div class="project-top">
+                <span class="project-year">2026</span>
+                <span class="project-role">Personal Project</span>
+              </div>
+              <h3 class="project-name">AI for Entrepreneurs</h3>
+              <p class="project-client">Personal Project</p>
+              <p class="project-desc">
+                A web profile built to introduce AI concepts and tools for entrepreneurs.
+                Designed with a clean layout to present information clearly and accessibly.
+              </p>
+              <ul class="tags">
+                <li>HTML</li><li>CSS</li><li>Responsive</li><li>UI</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section section-alt" id="about">
+      <div class="wrap about-grid">
+        <div class="about-media reveal">
+          <!-- Replace the src below with your own photo (e.g. assets/rolando.jpg).
+               If no image is found, the monogram fallback is shown automatically. -->
+          <figure class="photo">
+            <img src="assets/rolando.png" alt="Portrait of Rolando"
+                 onerror="this.style.display='none';this.closest('.photo').classList.add('no-photo')" />
+            <span class="photo-fallback" aria-hidden="true">R</span>
+          </figure>
+          <div class="about-facts">
+            <div class="fact"><span class="fact-k">Based in</span><span class="fact-v">ID</span></div>
+            <div class="fact"><span class="fact-k">Focus</span><span class="fact-v">Front-end &amp; full-stack web</span></div>
+            <div class="fact"><span class="fact-k">GPA</span><span class="fact-v">3.80 / 4.00</span></div>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <header class="section-head reveal">
+            <span class="section-num">02</span>
+            <h2 class="section-title">About</h2>
+          </header>
+          <p class="about-lead reveal">
+            I'm an Information Technology graduate from Bunda Mulia University with a
+            genuine love for building things for the web.
+          </p>
+          <p class="reveal">
+            Across internships, freelance work and campus projects I've touched most of the
+            stack — from designing responsive interfaces to wiring up PHP/MySQL back-ends and
+            approval workflows. I care about clean, readable code and interfaces that feel
+            obvious to use.
+          </p>
+          <p class="reveal">
+            I'm adaptable, self-driven and comfortable working remotely, with a focus on clear
+            communication and delivering work that actually ships. Outside of code I spend time
+            in the financial markets — four years with FX/CFDs on MetaTrader 5 — which sharpened
+            my discipline around risk, patience and paying attention to detail.
+          </p>
+          <a href="#" class="btn btn-line reveal" id="cvBtn" download>
+            Download CV (PDF)
+            <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section" id="skills">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <span class="section-num">03</span>
+          <h2 class="section-title">Skills &amp; tools</h2>
+          <p class="section-sub">What I reach for when building — and what keeps me sharp outside of it.</p>
+        </header>
+
+        <div class="skills-grid">
+          <div class="skill-col reveal">
+            <h3 class="skill-h">Development</h3>
+            <ul class="skill-list">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>PHP</li>
+              <li>Laravel</li>
+              <li>MySQL</li>
+              <li>React Native</li>
+            </ul>
+          </div>
+          <div class="skill-col reveal">
+            <h3 class="skill-h">Also worked with</h3>
+            <ul class="skill-list">
+              <li>Cryptocurrency</li>
+              <li>Smart Contracts</li>
+              <li>Responsive UI/UX</li>
+              <li>Bilingual sites</li>
+            </ul>
+          </div>
+          <div class="skill-col reveal">
+            <h3 class="skill-h">Beyond code</h3>
+            <ul class="skill-list muted">
+              <li>MetaTrader 5</li>
+              <li>Risk Management</li>
+              <li>Technical Analysis</li>
+              <li>Position Sizing</li>
+            </ul>
+          </div>
+          <div class="skill-col reveal">
+            <h3 class="skill-h">How I work</h3>
+            <ul class="skill-list muted">
+              <li>Clear communication</li>
+              <li>Time management</li>
+              <li>Problem solving</li>
+              <li>Strong work ethic</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="section section-alt" id="experience">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <span class="section-num">04</span>
+          <h2 class="section-title">Experience</h2>
+          <p class="section-sub">A path through internships, freelance projects and hands-on web development.</p>
+        </header>
+
+        <ol class="timeline">
+          <li class="tl-item reveal">
+            <div class="tl-date">Jan – Feb 2026</div>
+            <div class="tl-body">
+              <h3 class="tl-role">Freelance Web Developer <a class="tl-at" href="https://whatieat.id" target="_blank" rel="noopener">Whatieat.id</a></h3>
+              <p class="tl-desc">Built a responsive website for online food sales with HTML, CSS &amp; JavaScript. Designed a user-friendly UI and product display features to support online ordering.</p>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <div class="tl-date">Jul 2022</div>
+            <div class="tl-body">
+              <h3 class="tl-role">Web Developer <span class="tl-at">Cinta Kasih Tzu Chi School</span></h3>
+              <p class="tl-desc">Developed a vehicle rental web app: request form, vehicle catalogue, applicant tracking, and an automatic approval flow feeding a print menu.</p>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <div class="tl-date">Jan – Feb 2020</div>
+            <div class="tl-body">
+              <h3 class="tl-role">Web Developer <span class="tl-at">PT. Istana Rempah Maju Sejahtera</span></h3>
+              <p class="tl-desc">Created a company profile highlighting services, products and values, with a bilingual (EN/ID) menu built for accessibility.</p>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <div class="tl-date">Jan – Feb 2020</div>
+            <div class="tl-body">
+              <h3 class="tl-role">Intern Android Developer <span class="tl-at">PT. Tays Bogainti Selaras</span></h3>
+              <p class="tl-desc">Built Android UI/UX with React Native and helped modify a management website in PHP.</p>
+            </div>
+          </li>
+          <li class="tl-item reveal">
+            <div class="tl-date">Sep – Oct 2019</div>
+            <div class="tl-body">
+              <h3 class="tl-role">Intern Fullstack Developer <span class="tl-at">PT. Digital Asia Utama</span></h3>
+              <p class="tl-desc">Modified PHP web-based sales software and handled software installation for the company.</p>
+            </div>
+          </li>
+        </ol>
+
+        <!-- Education & awards -->
+        <div class="edu-grid">
+          <div class="edu-col reveal">
+            <h3 class="skill-h">Education</h3>
+            <div class="edu-item">
+              <div class="edu-top"><strong>Bunda Mulia University</strong><span>2021–2025</span></div>
+              <p>B. Information Technology · GPA 3.80 / 4.00 · Jakarta</p>
+            </div>
+            <div class="edu-item">
+              <div class="edu-top"><strong>Cinta Kasih Tzu Chi School</strong><span>2018–2021</span></div>
+              <p>Software Engineering major · Jakarta</p>
+            </div>
+          </div>
+          <div class="edu-col reveal">
+            <h3 class="skill-h">Awards &amp; certificates</h3>
+            <div class="edu-item">
+              <div class="edu-top"><strong>Web Technologies Competition</strong><span>2019</span></div>
+              <p>4th Runner-Up · District level</p>
+            </div>
+            <div class="edu-item">
+              <div class="edu-top"><strong>Dasar Pemrograman JavaScript</strong><span>2025</span></div>
+              <p>Certificate · Dicoding Indonesia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <span class="section-num">05</span>
+          <h2 class="section-title contact-title">Let's build<br />something good.</h2>
+        </header>
+        <p class="contact-sub reveal">
+          Open to web developer roles, freelance projects and collaborations.
+          The fastest way to reach me is email.
+        </p>
+
+        <div class="contact-actions reveal">
+          <a href="mailto:andorolandowork@gmail.com" class="btn btn-accent btn-lg" id="emailBtn">
+            andorolandowork@gmail.com
+            <span class="copy-hint" id="copyHint">Copy</span>
+          </a>
+        </div>
+
+        <ul class="social reveal">
+          <li><a href="https://www.linkedin.com/in/rolando-rolando-65038b229/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
+          <li><a href="mailto:andorolandowork@gmail.com">Email <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-left">
+        <span class="brand-mark">R</span>
+        <span>Rolando — Web Developer</span>
+      </div>
+      <div class="footer-mid">
+        <span class="clock" id="clock">--:--:--</span>
+        <span class="clock-label">WIB</span>
+      </div>
+      <div class="footer-right">
+        <a href="#top" class="to-top">Back to top <span aria-hidden="true">↑</span></a>
+        <span class="copyright">© <span id="year">2026</span> Rolando</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
