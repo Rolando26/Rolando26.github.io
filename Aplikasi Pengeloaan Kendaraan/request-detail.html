@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Request Detail — Vehicle Rental System</title>
+<link rel="stylesheet" href="assets/style.css" />
+<style>
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  @media (max-width: 880px) { .detail-grid { grid-template-columns: 1fr; } }
+
+  .detail-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .detail-value {
+    font-size: 14px;
+    color: var(--text);
+  }
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .timeline li {
+    position: relative;
+    padding: 0 0 16px 24px;
+    border-left: 2px solid var(--border);
+  }
+  .timeline li:last-child { border-left-color: transparent; padding-bottom: 0; }
+  .timeline li::before {
+    content: "";
+    position: absolute;
+    left: -7px; top: 4px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 2px solid var(--text-muted);
+  }
+  .timeline li.done::before { background: var(--success); border-color: var(--success); }
+  .timeline li.rejected::before { background: var(--danger); border-color: var(--danger); }
+  .timeline li.active::before { background: var(--warning); border-color: var(--warning); animation: pulse 1.5s infinite; }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(217,119,6,0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(217,119,6,0); }
+  }
+  .timeline-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .timeline-meta { font-size: 12px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<script src="assets/app.js"></script>
+<script>
+  const user = Auth.require();
+</script>
+
+<div class="app">
+  <div id="sidebar-mount"></div>
+
+  <main class="main">
+    <script>document.write(renderDemoBanner());</script>
+
+    <div id="content"></div>
+  </main>
+</div>
+
+<script>
+  const data = DB.load();
+  const params = new URLSearchParams(window.location.search);
+  const reqId = parseInt(params.get('id'));
+  const request = data.requests.find(r => r.id === reqId);
+
+  const isAdmin = user.role === 'admin';
+  document.getElementById('sidebar-mount').outerHTML = renderSidebar(isAdmin ? 'admin' : 'my-requests');
+
+  if (!request) {
+    document.getElementById('content').innerHTML = `
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Request Not Found</h1>
+          <p class="page-subtitle">The request you're looking for doesn't exist.</p>
+        </div>
+      </div>
+      <a href="${isAdmin ? 'admin.html' : 'my-requests.html'}" class="btn">← Back</a>
+    `;
+  } else if (!isAdmin && request.userId !== user.id) {
+    document.getElementById('content').innerHTML = `
+      <div class="alert alert-danger">You don't have permission to view this request.</div>
+      <a href="my-requests.html" class="btn">← Back to my requests</a>
+    `;
+  } else {
+    renderDetail();
+  }
+
+  function renderDetail() {
+    const r = request;
+    const backUrl = isAdmin ? 'admin.html' : 'my-requests.html';
+
+    document.getElementById('content').innerHTML = `
+      <div class="page-header">
+        <div>
+          <div class="breadcrumbs">
+            <a href="${backUrl}">${isAdmin ? 'Dashboard' : 'My Requests'}</a> <span>/</span>
+            <span style="color:var(--text);">Request #${r.id}</span>
+          </div>
+          <h1 class="page-title">Request #${r.id}</h1>
+          <p class="page-subtitle">
+            <span class="badge ${r.status === 'approved' ? 'success' : r.status === 'rejected' ? 'danger' : 'warning'}">${fmt.status(r.status)}</span>
+            <span style="margin-left:8px;">Submitted ${fmt.dateTime(r.createdAt)}</span>
+          </p>
+        </div>
+        <div style="display:flex;gap:8px;">
+          ${r.status === 'approved' ? `<a href="approval-print.html?id=${r.id}" class="btn" target="_blank">📄 Print Approval Letter</a>` : ''}
+          <a href="${backUrl}" class="btn btn-ghost">← Back</a>
+        </div>
+      </div>
+
+      <div class="detail-grid">
+
+        <div>
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header"><div class="card-title">Requester Information</div></div>
+            <div class="card-body">
+              <div class="detail-row">
+                <div class="detail-label">Full Name</div>
+                <div class="detail-value">${escapeHtml(r.requesterName)}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Phone</div>
+                <div class="detail-value" style="font-family:var(--font-mono);">${escapeHtml(r.phone)}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">School Unit</div>
+                <div class="detail-value">${fmt.unit(r.schoolUnit)}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Address</div>
+                <div class="detail-value">${escapeHtml(r.address)}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header"><div class="card-title">Vehicle & Schedule</div></div>
+            <div class="card-body">
+              <div class="detail-row">
+                <div class="detail-label">Vehicle Type</div>
+                <div class="detail-value">${fmt.vehicleType(r.vehicleType)}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Date</div>
+                <div class="detail-value">${fmt.date(r.requestDate)}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Standby Location</div>
+                <div class="detail-value">${escapeHtml(r.standbyLocation)}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Standby Time</div>
+                <div class="detail-value">${r.standbyTime}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Departure → Return</div>
+                <div class="detail-value">${r.startTime} – ${r.endTime}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><div class="card-title">Activity Details</div></div>
+            <div class="card-body">
+              <div class="detail-row">
+                <div class="detail-label">Activity</div>
+                <div class="detail-value">${escapeHtml(r.activity)}</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Participants</div>
+                <div class="detail-value">${r.participants} people</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Notes</div>
+                <div class="detail-value">${r.notes ? escapeHtml(r.notes) : '<span style="color:var(--text-faint);">No additional notes</span>'}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <!-- Timeline -->
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header"><div class="card-title">Status Timeline</div></div>
+            <div class="card-body">
+              <ul class="timeline">
+                <li class="done">
+                  <div class="timeline-title">Submitted</div>
+                  <div class="timeline-meta">${fmt.dateTime(r.createdAt)}</div>
+                </li>
+                <li class="${r.status === 'pending' ? 'active' : r.status === 'approved' ? 'done' : 'rejected'}">
+                  <div class="timeline-title">${
+                    r.status === 'pending' ? 'Awaiting Review' :
+                    r.status === 'approved' ? 'Approved' : 'Rejected'
+                  }</div>
+                  <div class="timeline-meta">
+                    ${r.status === 'pending' ? 'Admin will review shortly' : fmt.dateTime(r.reviewedAt)}
+                  </div>
+                </li>
+                ${r.status === 'approved' ? `
+                  <li>
+                    <div class="timeline-title">Ready to print approval letter</div>
+                    <div class="timeline-meta">Click the print button above</div>
+                  </li>` : ''}
+              </ul>
+            </div>
+          </div>
+
+          ${r.status !== 'pending' ? `
+            <div class="card" style="margin-bottom:20px;">
+              <div class="card-header"><div class="card-title">Review Note</div></div>
+              <div class="card-body">
+                <p style="font-size:14px;color:var(--text-secondary);line-height:1.6;">
+                  ${r.reviewNote ? escapeHtml(r.reviewNote) : '<em style="color:var(--text-muted);">No note provided</em>'}
+                </p>
+              </div>
+            </div>
+          ` : ''}
+
+          ${isAdmin && r.status === 'pending' ? `
+            <div class="card">
+              <div class="card-header"><div class="card-title">⚡ Take Action</div></div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="form-label">Review Note (optional for approval, required for rejection)</label>
+                  <textarea id="reviewNote" class="form-control" placeholder="e.g. Approved with the noted lunch stop. Or: Vehicle unavailable on this date — please rebook."></textarea>
+                </div>
+                <div style="display:flex;gap:8px;">
+                  <button class="btn btn-success" style="flex:1;justify-content:center;" onclick="approveReq()">✓ Approve Request</button>
+                  <button class="btn btn-danger" style="flex:1;justify-content:center;" onclick="rejectReq()">✕ Reject Request</button>
+                </div>
+              </div>
+            </div>
+          ` : ''}
+        </div>
+
+      </div>
+    `;
+  }
+
+  window.approveReq = function() {
+    const note = document.getElementById('reviewNote').value.trim();
+    if (!confirm('Approve this request?')) return;
+    const d = DB.load();
+    const r = d.requests.find(x => x.id === reqId);
+    r.status = 'approved';
+    r.reviewedAt = new Date().toISOString();
+    r.reviewedBy = user.id;
+    r.reviewNote = note || 'Approved by admin.';
+    DB.save(d);
+    window.location.reload();
+  };
+
+  window.rejectReq = function() {
+    const note = document.getElementById('reviewNote').value.trim();
+    if (!note) {
+      alert('Please provide a reason for rejection. The requester will see this note.');
+      document.getElementById('reviewNote').focus();
+      return;
+    }
+    if (!confirm('Reject this request?')) return;
+    const d = DB.load();
+    const r = d.requests.find(x => x.id === reqId);
+    r.status = 'rejected';
+    r.reviewedAt = new Date().toISOString();
+    r.reviewedBy = user.id;
+    r.reviewNote = note;
+    DB.save(d);
+    window.location.reload();
+  };
+</script>
+
+</body>
+</html>

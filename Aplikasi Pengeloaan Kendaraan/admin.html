@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Dashboard — Vehicle Rental System</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<script src="assets/app.js"></script>
+<script>
+  const user = Auth.require('admin');
+</script>
+
+<div class="app">
+  <div id="sidebar-mount"></div>
+
+  <main class="main">
+    <script>document.write(renderDemoBanner());</script>
+
+    <div class="page-header">
+      <div>
+        <div class="breadcrumbs">
+          <span style="color:var(--text);">Dashboard</span>
+        </div>
+        <h1 class="page-title">Admin Dashboard</h1>
+        <p class="page-subtitle">Welcome back, ${''}<span id="adminName"></span>. Here's the operational overview.</p>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid" id="statsGrid"></div>
+
+    <!-- Pending requests (priority section) -->
+    <div class="card" style="margin-bottom:24px;">
+      <div class="card-header">
+        <div>
+          <div class="card-title">⚡ Pending Review</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Requests awaiting your decision</div>
+        </div>
+      </div>
+      <div class="card-body no-padding">
+        <div id="pendingList"></div>
+      </div>
+    </div>
+
+    <!-- All requests -->
+    <div class="card" id="requests">
+      <div class="card-header">
+        <div class="card-title">All Requests</div>
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+          <input type="text" id="searchInput" class="form-control" placeholder="Search by name, activity..." style="width:240px;padding:6px 10px;font-size:13px;">
+          <button class="btn btn-sm filter-btn active" data-status="all">All</button>
+          <button class="btn btn-sm filter-btn" data-status="pending">Pending</button>
+          <button class="btn btn-sm filter-btn" data-status="approved">Approved</button>
+          <button class="btn btn-sm filter-btn" data-status="rejected">Rejected</button>
+        </div>
+      </div>
+      <div class="card-body no-padding">
+        <div id="allRequestsList"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  document.getElementById('sidebar-mount').outerHTML = renderSidebar('admin');
+  document.getElementById('adminName').textContent = user.fullname;
+
+  let data = DB.load();
+  let currentFilter = 'all';
+  let searchQuery = '';
+
+  function render() {
+    data = DB.load();
+
+    // Stats
+    const stats = {
+      total: data.requests.length,
+      pending: data.requests.filter(r => r.status === 'pending').length,
+      approved: data.requests.filter(r => r.status === 'approved').length,
+      activeVehicles: data.vehicles.filter(v => v.status === 'available').length,
+      totalVehicles: data.vehicles.length
+    };
+
+    document.getElementById('statsGrid').innerHTML = `
+      <div class="stat-card warning">
+        <div class="stat-label">Pending Review</div>
+        <div class="stat-value">${stats.pending}</div>
+        <div class="stat-meta">${stats.pending === 0 ? 'All caught up ✨' : 'Needs your attention'}</div>
+      </div>
+      <div class="stat-card success">
+        <div class="stat-label">Approved</div>
+        <div class="stat-value">${stats.approved}</div>
+        <div class="stat-meta">All time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Requests</div>
+        <div class="stat-value">${stats.total}</div>
+        <div class="stat-meta">All statuses</div>
+      </div>
+      <div class="stat-card info">
+        <div class="stat-label">Available Vehicles</div>
+        <div class="stat-value">${stats.activeVehicles}/${stats.totalVehicles}</div>
+        <div class="stat-meta">Ready to deploy</div>
+      </div>
+    `;
+
+    // Pending list
+    const pending = data.requests.filter(r => r.status === 'pending').sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    const pendingEl = document.getElementById('pendingList');
+    if (pending.length === 0) {
+      pendingEl.innerHTML = `
+        <div class="empty" style="padding:30px 20px;">
+          <div style="font-size:32px;margin-bottom:8px;">✨</div>
+          <div class="empty-title">All caught up!</div>
+          <div class="empty-text">No pending requests need review.</div>
+        </div>`;
+    } else {
+      pendingEl.innerHTML = `
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th><th>Submitted</th><th>Requester</th><th>Date Needed</th><th>Vehicle</th><th>Activity</th><th class="actions">Quick Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${pending.map(r => `
+                <tr>
+                  <td style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">#${r.id}</td>
+                  <td style="font-size:12px;color:var(--text-muted);">${fmt.dateTime(r.createdAt)}</td>
+                  <td><strong>${escapeHtml(r.requesterName)}</strong><br><span style="font-size:11px;color:var(--text-muted);">${fmt.unit(r.schoolUnit)}</span></td>
+                  <td>${fmt.date(r.requestDate)}</td>
+                  <td>${fmt.vehicleType(r.vehicleType)}</td>
+                  <td>${escapeHtml(r.activity.length > 35 ? r.activity.slice(0, 35) + '…' : r.activity)}</td>
+                  <td class="actions">
+                    <button class="btn btn-sm btn-success" onclick="quickApprove(${r.id})">✓ Approve</button>
+                    <button class="btn btn-sm btn-danger" onclick="quickReject(${r.id})">Reject</button>
+                    <button class="btn btn-sm" onclick="viewRequest(${r.id})">Details</button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>`;
+    }
+
+    // All requests list
+    let filtered = [...data.requests].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    if (currentFilter !== 'all') filtered = filtered.filter(r => r.status === currentFilter);
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      filtered = filtered.filter(r =>
+        r.requesterName.toLowerCase().includes(q) ||
+        r.activity.toLowerCase().includes(q) ||
+        String(r.id).includes(q)
+      );
+    }
+
+    const allEl = document.getElementById('allRequestsList');
+    if (filtered.length === 0) {
+      allEl.innerHTML = `<div class="empty"><div class="empty-icon">📋</div><div class="empty-title">No requests match</div><div class="empty-text">Try adjusting your filters.</div></div>`;
+    } else {
+      allEl.innerHTML = `
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th><th>Date</th><th>Requester</th><th>Unit</th><th>Vehicle</th><th>Activity</th><th>Pax</th><th>Status</th><th class="actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filtered.map(r => `
+                <tr>
+                  <td style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">#${r.id}</td>
+                  <td>${fmt.date(r.requestDate)}</td>
+                  <td>${escapeHtml(r.requesterName)}</td>
+                  <td><span style="font-size:11px;color:var(--text-muted);">${fmt.unit(r.schoolUnit)}</span></td>
+                  <td>${fmt.vehicleType(r.vehicleType)}</td>
+                  <td>${escapeHtml(r.activity.length > 30 ? r.activity.slice(0, 30) + '…' : r.activity)}</td>
+                  <td>${r.participants}</td>
+                  <td><span class="badge ${
+                    r.status === 'approved' ? 'success' :
+                    r.status === 'rejected' ? 'danger' : 'warning'
+                  }">${fmt.status(r.status)}</span></td>
+                  <td class="actions">
+                    ${r.status === 'approved' ? `<a href="approval-print.html?id=${r.id}" class="btn btn-sm" target="_blank">📄</a>` : ''}
+                    <button class="btn btn-sm" onclick="viewRequest(${r.id})">View</button>
+                    ${r.status !== 'rejected' ? `<button class="btn btn-sm btn-danger" onclick="deleteRequest(${r.id})" title="Delete">🗑</button>` : ''}
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>`;
+    }
+  }
+
+  // Action handlers
+  window.quickApprove = function(id) {
+    if (!confirm('Approve this request?')) return;
+    const data = DB.load();
+    const r = data.requests.find(x => x.id === id);
+    if (r) {
+      r.status = 'approved';
+      r.reviewedAt = new Date().toISOString();
+      r.reviewedBy = user.id;
+      r.reviewNote = 'Approved by admin.';
+      DB.save(data);
+      render();
+    }
+  };
+
+  window.quickReject = function(id) {
+    const note = prompt('Reason for rejection (will be visible to requester):');
+    if (note === null) return;
+    const data = DB.load();
+    const r = data.requests.find(x => x.id === id);
+    if (r) {
+      r.status = 'rejected';
+      r.reviewedAt = new Date().toISOString();
+      r.reviewedBy = user.id;
+      r.reviewNote = note || 'Request rejected.';
+      DB.save(data);
+      render();
+    }
+  };
+
+  window.deleteRequest = function(id) {
+    if (!confirm('Delete this request permanently?')) return;
+    const data = DB.load();
+    data.requests = data.requests.filter(r => r.id !== id);
+    DB.save(data);
+    render();
+  };
+
+  window.viewRequest = function(id) {
+    window.location.href = `request-detail.html?id=${id}`;
+  };
+
+  // Filters
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.status;
+      render();
+    });
+  });
+
+  document.getElementById('searchInput').addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    render();
+  });
+
+  const style = document.createElement('style');
+  style.textContent = `.filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }`;
+  document.head.appendChild(style);
+
+  render();
+
+  // Auto-scroll if URL has hash
+  if (window.location.hash === '#requests') {
+    document.getElementById('requests').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>New Request — Vehicle Rental System</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<script src="assets/app.js"></script>
+<script>
+  const user = Auth.require('user');
+</script>
+
+<div class="app">
+
+  <div id="sidebar-mount"></div>
+
+  <main class="main">
+    <script>document.write(renderDemoBanner());</script>
+
+    <div class="page-header">
+      <div>
+        <div class="breadcrumbs">
+          <a href="catalog.html">Home</a> <span>/</span>
+          <a href="my-requests.html">My Requests</a> <span>/</span>
+          <span style="color:var(--text);">New Request</span>
+        </div>
+        <h1 class="page-title">New Rental Request</h1>
+        <p class="page-subtitle">Submit a rental request. Admin will review and approve or reject.</p>
+      </div>
+    </div>
+
+    <div id="successMsg" class="alert alert-success" style="display:none;">
+      <div>
+        <strong>Request submitted!</strong>
+        Your request ID is <span id="newReqId"></span>. You'll be redirected to your requests list...
+      </div>
+    </div>
+
+    <form id="requestForm" class="card">
+      <div class="card-body">
+
+        <!-- Section 1: Requester Info -->
+        <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px;">
+          1. Requester Information
+        </h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name <span class="required">*</span></label>
+            <input type="text" name="requesterName" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number <span class="required">*</span></label>
+            <input type="tel" name="phone" class="form-control" placeholder="081xxxxxxxx" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Address <span class="required">*</span></label>
+          <input type="text" name="address" class="form-control" placeholder="Destination address" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">School Unit <span class="required">*</span></label>
+          <div class="radio-grid">
+            <label class="radio-card">
+              <input type="radio" name="schoolUnit" value="tk" required>
+              <div class="radio-card-inner">
+                <div class="label">Kindergarten</div>
+                <div class="desc">TK</div>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="schoolUnit" value="sd">
+              <div class="radio-card-inner">
+                <div class="label">Elementary</div>
+                <div class="desc">SD</div>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="schoolUnit" value="smp">
+              <div class="radio-card-inner">
+                <div class="label">Middle School</div>
+                <div class="desc">SMP</div>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="schoolUnit" value="sma">
+              <div class="radio-card-inner">
+                <div class="label">High School</div>
+                <div class="desc">SMA</div>
+              </div>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="schoolUnit" value="smk">
+              <div class="radio-card-inner">
+                <div class="label">Vocational</div>
+                <div class="desc">SMK</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:24px 0;">
+
+        <!-- Section 2: Vehicle -->
+        <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px;">
+          2. Vehicle Selection
+        </h3>
+
+        <div class="form-group">
+          <label class="form-label">Vehicle Type <span class="required">*</span></label>
+          <div class="radio-grid" id="vehicleGrid"></div>
+          <div class="form-hint">Only available vehicles are shown. If a type is greyed out, all units are booked.</div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:24px 0;">
+
+        <!-- Section 3: Schedule -->
+        <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px;">
+          3. Schedule
+        </h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Date of Use <span class="required">*</span></label>
+            <input type="date" name="requestDate" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Standby Location <span class="required">*</span></label>
+            <input type="text" name="standbyLocation" class="form-control" placeholder="e.g. Front Gate, Main Parking" required>
+          </div>
+        </div>
+
+        <div class="form-row-3">
+          <div class="form-group">
+            <label class="form-label">Standby Time <span class="required">*</span></label>
+            <input type="time" name="standbyTime" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Departure Time <span class="required">*</span></label>
+            <input type="time" name="startTime" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Return Time <span class="required">*</span></label>
+            <input type="time" name="endTime" class="form-control" required>
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--border);margin:24px 0;">
+
+        <!-- Section 4: Activity -->
+        <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px;">
+          4. Activity Details
+        </h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Activity / Purpose <span class="required">*</span></label>
+            <input type="text" name="activity" class="form-control" placeholder="e.g. Field trip, Sports event" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Number of Participants <span class="required">*</span></label>
+            <input type="number" name="participants" class="form-control" min="1" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Additional Notes</label>
+          <textarea name="notes" class="form-control" placeholder="Special requirements, accessibility needs, etc."></textarea>
+        </div>
+
+      </div>
+      <div class="card-header" style="border-top:1px solid var(--border);border-bottom:none;justify-content:flex-end;gap:8px;">
+        <a href="my-requests.html" class="btn">Cancel</a>
+        <button type="submit" class="btn btn-primary">Submit Request</button>
+      </div>
+    </form>
+
+  </main>
+</div>
+
+<script>
+  document.getElementById('sidebar-mount').outerHTML = renderSidebar('request');
+
+  const data = DB.load();
+
+  // Render available vehicle types as radio cards
+  const vehicleTypes = [
+    { type: 'avanza', label: 'Toyota Avanza', desc: '7-seat MPV', icon: '🚗' },
+    { type: 'apv', label: 'Suzuki APV', desc: '8-seat MPV', icon: '🚙' },
+    { type: 'minibus20', label: 'Mini Bus 20', desc: '20-seat bus', icon: '🚐' },
+    { type: 'minibus45', label: 'Mini Bus 45', desc: '45-seat bus', icon: '🚌' }
+  ];
+
+  document.getElementById('vehicleGrid').innerHTML = vehicleTypes.map(vt => {
+    const available = data.vehicles.some(v => v.type === vt.type && v.status === 'available');
+    return `
+      <label class="radio-card" style="${!available ? 'opacity:0.4;cursor:not-allowed;' : ''}">
+        <input type="radio" name="vehicleType" value="${vt.type}" required ${!available ? 'disabled' : ''}>
+        <div class="radio-card-inner">
+          <div class="label">${vt.icon} ${vt.label}</div>
+          <div class="desc">${vt.desc}${!available ? ' · unavailable' : ''}</div>
+        </div>
+      </label>
+    `;
+  }).join('');
+
+  // Pre-fill name and phone from user
+  document.querySelector('[name="requesterName"]').value = user.fullname;
+
+  // Handle radio card visual selection
+  document.addEventListener('change', (e) => {
+    if (e.target.type === 'radio') {
+      const cards = document.querySelectorAll(`.radio-card input[name="${e.target.name}"]`);
+      cards.forEach(c => c.closest('.radio-card').classList.toggle('selected', c.checked));
+    }
+  });
+
+  // Set default date to tomorrow
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  document.querySelector('[name="requestDate"]').value = tomorrow.toISOString().split('T')[0];
+  document.querySelector('[name="requestDate"]').min = new Date().toISOString().split('T')[0];
+
+  // Submit handler
+  document.getElementById('requestForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+
+    // Find an available vehicle of selected type
+    const selectedType = fd.get('vehicleType');
+    const vehicle = data.vehicles.find(v => v.type === selectedType && v.status === 'available');
+
+    const newRequest = {
+      id: Date.now(),
+      userId: user.id,
+      requesterName: fd.get('requesterName'),
+      phone: fd.get('phone'),
+      schoolUnit: fd.get('schoolUnit'),
+      vehicleId: vehicle ? vehicle.id : null,
+      vehicleType: selectedType,
+      requestDate: fd.get('requestDate'),
+      address: fd.get('address'),
+      standbyLocation: fd.get('standbyLocation'),
+      standbyTime: fd.get('standbyTime'),
+      activity: fd.get('activity'),
+      participants: parseInt(fd.get('participants')),
+      startTime: fd.get('startTime'),
+      endTime: fd.get('endTime'),
+      notes: fd.get('notes') || '',
+      status: 'pending',
+      createdAt: new Date().toISOString(),
+      reviewedAt: null,
+      reviewedBy: null,
+      reviewNote: ''
+    };
+
+    data.requests.push(newRequest);
+    DB.save(data);
+
+    document.getElementById('newReqId').textContent = '#' + newRequest.id;
+    document.getElementById('successMsg').style.display = 'flex';
+    document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('requestForm').style.display = 'none';
+
+    setTimeout(() => {
+      window.location.href = 'my-requests.html';
+    }, 2000);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sign In — Vehicle Rental System</title>
+<meta name="description" content="School vehicle rental management system. Modern rebuild of original 2022 PHP+MySQL project." />
+<link rel="stylesheet" href="assets/style.css" />
+<style>
+  body {
+    background:
+      radial-gradient(circle at 20% 0%, rgba(37,99,235,0.08), transparent 50%),
+      radial-gradient(circle at 80% 100%, rgba(37,99,235,0.06), transparent 50%),
+      var(--bg);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    flex-direction: column;
+  }
+  .login-wrap {
+    width: 100%;
+    max-width: 420px;
+  }
+  .login-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px 36px;
+    box-shadow: var(--shadow-lg);
+  }
+  .login-brand {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .brand-mark {
+    width: 56px; height: 56px;
+    background: var(--primary);
+    border-radius: var(--radius-lg);
+    display: inline-flex; align-items: center; justify-content: center;
+    color: white; font-weight: 800; font-size: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 16px rgba(37,99,235,0.25);
+  }
+  .brand-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .brand-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .demo-creds {
+    background: var(--info-soft);
+    border: 1px solid #7dd3fc;
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: var(--info-text);
+  }
+  .demo-creds strong { display: block; margin-bottom: 6px; font-size: 12px; }
+  .demo-creds code {
+    display: inline-block;
+    background: rgba(255,255,255,0.7);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .demo-creds code:hover { background: white; }
+  .login-footer {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .login-footer a { color: var(--primary); }
+  .below-card {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .below-card a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--border-strong);
+  }
+  .below-card a:hover { color: var(--primary); border-color: var(--primary); }
+  .error-msg {
+    background: var(--danger-soft);
+    color: var(--danger-text);
+    border: 1px solid #fca5a5;
+    padding: 10px 12px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .error-msg.show { display: block; }
+</style>
+</head>
+<body>
+
+<div class="login-wrap">
+
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="brand-mark">V</div>
+      <div class="brand-name">Vehicle Rental System</div>
+      <div class="brand-sub">School transportation booking · Sign in to continue</div>
+    </div>
+
+    <div class="demo-creds">
+      <strong>🎭 Demo accounts (click to autofill):</strong>
+      Admin: <code data-fill="admin/admin123">admin / admin123</code><br>
+      User: <code data-fill="user/user123">user / user123</code>
+    </div>
+
+    <div class="error-msg" id="errorMsg"></div>
+
+    <form id="loginForm" autocomplete="off">
+      <div class="form-group">
+        <label class="form-label" for="username">Username</label>
+        <input type="text" id="username" class="form-control" autocomplete="username" required autofocus>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input type="password" id="password" class="form-control" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">
+        Sign in
+      </button>
+    </form>
+
+    <div class="login-footer">
+      Demo project · No real data is collected
+    </div>
+  </div>
+
+  <div class="below-card">
+    <a href="https://rolando26.github.io/rolando-portfolio/" target="_blank">← Back to Rolando's portfolio</a>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+<script>
+  // Initialize seed data on first visit
+  DB.load();
+
+  // If already logged in, skip the login page
+  const existing = Auth.current();
+  if (existing) {
+    window.location.href = existing.role === 'admin' ? 'admin.html' : 'catalog.html';
+  }
+
+  // Click-to-fill demo credentials
+  document.querySelectorAll('[data-fill]').forEach(el => {
+    el.addEventListener('click', () => {
+      const [u, p] = el.dataset.fill.split('/');
+      document.getElementById('username').value = u;
+      document.getElementById('password').value = p;
+      document.getElementById('username').focus();
+    });
+  });
+
+  // Handle login
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+    const errorEl = document.getElementById('errorMsg');
+
+    const user = Auth.login(username, password);
+    if (user) {
+      window.location.href = user.role === 'admin' ? 'admin.html' : 'catalog.html';
+    } else {
+      errorEl.textContent = 'Invalid username or password. Try the demo credentials above.';
+      errorEl.classList.add('show');
+    }
+  });
+</script>
+
+</body>
+</html>

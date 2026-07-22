@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vehicles — Vehicle Rental System</title>
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<script src="assets/app.js"></script>
+<script>
+  const user = Auth.require();
+</script>
+
+<div class="app">
+
+  <div id="sidebar-mount"></div>
+
+  <main class="main">
+    <script>document.write(renderDemoBanner());</script>
+
+    <div class="page-header">
+      <div>
+        <div class="breadcrumbs">
+          Home <span>/</span> <span style="color:var(--text);">Vehicles</span>
+        </div>
+        <h1 class="page-title">Available Vehicles</h1>
+        <p class="page-subtitle">Browse the school's fleet. Submit a request to rent for an event or trip.</p>
+      </div>
+      <div>
+        <a href="request.html" class="btn btn-primary">+ New Rental Request</a>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="card" style="margin-bottom:20px;">
+      <div class="card-body" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <div style="font-size:13px;color:var(--text-muted);font-weight:500;">Filter:</div>
+        <button class="btn btn-sm filter-btn active" data-filter="all">All vehicles</button>
+        <button class="btn btn-sm filter-btn" data-filter="available">Available only</button>
+        <button class="btn btn-sm filter-btn" data-filter="avanza">Avanza</button>
+        <button class="btn btn-sm filter-btn" data-filter="apv">APV</button>
+        <button class="btn btn-sm filter-btn" data-filter="minibus20">20-Seat Bus</button>
+        <button class="btn btn-sm filter-btn" data-filter="minibus45">45-Seat Bus</button>
+      </div>
+    </div>
+
+    <!-- Vehicle grid -->
+    <div class="vehicle-grid" id="vehicleGrid"></div>
+
+  </main>
+</div>
+
+<script>
+  document.getElementById('sidebar-mount').outerHTML = renderSidebar('catalog');
+
+  const data = DB.load();
+  let currentFilter = 'all';
+
+  function render() {
+    const grid = document.getElementById('vehicleGrid');
+    const vehicles = data.vehicles.filter(v => {
+      if (currentFilter === 'all') return true;
+      if (currentFilter === 'available') return v.status === 'available';
+      return v.type === currentFilter;
+    });
+
+    if (vehicles.length === 0) {
+      grid.innerHTML = `
+        <div class="empty" style="grid-column:1/-1;">
+          <div class="empty-icon">🚗</div>
+          <div class="empty-title">No vehicles match this filter</div>
+          <div class="empty-text">Try a different filter to see more vehicles.</div>
+        </div>`;
+      return;
+    }
+
+    grid.innerHTML = vehicles.map(v => `
+      <div class="vehicle-card">
+        <div class="vehicle-image">${v.icon}</div>
+        <div class="vehicle-body">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+            <div>
+              <div class="vehicle-name">${escapeHtml(v.name)}</div>
+              <div class="vehicle-type">${fmt.vehicleType(v.type)} · ${v.year}</div>
+            </div>
+            <span class="badge ${v.status === 'available' ? 'success' : v.status === 'maintenance' ? 'warning' : 'neutral'}">
+              ${v.status}
+            </span>
+          </div>
+          <p style="font-size:13px;color:var(--text-secondary);margin:8px 0 0;line-height:1.5;">
+            ${escapeHtml(v.description)}
+          </p>
+          <div class="vehicle-specs">
+            <span>👥 ${v.seats} seats</span>
+            <span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);">${v.plate}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      render();
+    });
+  });
+
+  // Highlight active filter
+  const style = document.createElement('style');
+  style.textContent = `.filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }`;
+  document.head.appendChild(style);
+
+  render();
+</script>
+
+</body>
+</html>
