@@ -145,6 +145,15 @@
     });
   }
 
+  /* ---------- Back to top ---------- */
+  var toTop = document.querySelector('.to-top');
+  if (toTop) {
+    toTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   /* ---------- CV download button ---------- */
   // Point to your PDF. Drop the file at assets/CV-Rolando.pdf (see README).
   var cvBtn = document.getElementById('cvBtn');
