@@ -32,12 +32,20 @@
     01.COMMON css 
 ===========================*/
 @import url("https://fonts.googleapis.com/css?family=Nunito:300,400,700,800&display=swap");
+html {
+  overflow-x: hidden;
+  width: 100%; }
+
 body {
   font-family: "Nunito", sans-serif;
   font-weight: normal;
   font-style: normal;
   color: #798795;
-  overflow-X: hidden; }
+  overflow-x: hidden;
+  width: 100%; }
+
+section[id] {
+  scroll-margin-top: 90px; }
 
 * {
   margin: 0;
@@ -182,6 +190,18 @@ p {
   .section-title .title span {
     font-weight: 400;
     display: contents; }
+@media (max-width: 767px) {
+  .service-area .section-title,
+  .testimonial-left-content .section-title,
+  .testimonial-left-content .text {
+    text-align: center; }
+  .testimonial-left-content .testimonial-line {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; } }
 
 /*===== All Slick Slide Outline Style =====*/
 .slick-slide {
@@ -863,6 +883,17 @@ p {
       font-size: 24px; } }
   .about-title .title span {
     font-weight: 700; }
+
+@media (max-width: 767px) {
+  .single-counter {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center; }
+    .single-counter .counter-content {
+      -webkit-box-flex: 0;
+      -ms-flex: none;
+      flex: none; } }
 
 .single-counter .counter-shape {
   width: 55px; }
@@ -1758,6 +1789,26 @@ p {
   display: block;
   font-size: 18px;
   color: #222; }
+
+@media (max-width: 767px) {
+  .single-contact-info {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center; }
+    .single-contact-info .contact-info-content {
+      padding-left: 0;
+      padding-top: 15px; }
+  .contact-wrapper-form .contact-title,
+  .contact-form label {
+    text-align: center; }
+  .contact-form .main-btn {
+    display: block;
+    margin: 0 auto; } }
 .contact-form input, .contact-form textarea {
   width: 100%;
   border-radius: 7px;
@@ -1818,6 +1869,11 @@ p {
     transition: all 0.3s ease-out 0s; }
     .footer-contact .social li a:hover {
       color: #f14836; }
+
+@media (max-width: 767px) {
+  .footer-about,
+  .footer-contact {
+    text-align: center; } }
 
 .footer-copyright {
   padding: 25px;

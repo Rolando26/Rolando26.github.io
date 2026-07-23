@@ -39,7 +39,8 @@ $(function() {
     
     
     $.scrollIt({
-        scrollTime: 800, 
+        scrollTime: 800,
+        topOffset: -90,
     });
     
         
