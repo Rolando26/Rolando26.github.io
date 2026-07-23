@@ -187,6 +187,7 @@ button { font-family: inherit; cursor: pointer; }
   padding: 32px 40px;
   max-width: 1280px;
   width: 100%;
+  min-width: 0;
 }
 
 /* page header */
@@ -298,6 +299,7 @@ button { font-family: inherit; cursor: pointer; }
   border-bottom: 1px solid var(--border);
   display: flex; justify-content: space-between; align-items: center;
   gap: 16px;
+  flex-wrap: wrap;
 }
 .card-title {
   font-size: 15px;
@@ -637,6 +639,7 @@ select.form-control {
   .sidebar-overlay.show { display: block; }
 }
 .mobile-header { display: none; }
+.sidebar-overlay { display: none; }
 
 /* =========================================================
    Print Styles (for approval letter)

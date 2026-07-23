@@ -8,18 +8,18 @@
 </head>
 <body>
 
-    <header class="hero">
+    <header class="hero" id="home">
         <nav class="navbar">
             <div class="logo">
                 <img src="logo.jpg" alt="BarberPro Logo">
                 <span>BarberPro</span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Artists</a></li>
-                <li><a href="#">Pricing</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#services" onclick="closeMenu()">Services</a></li>
+                <li><a href="#gallery" onclick="closeMenu()">Artists</a></li>
+                <li><a href="#pricing" onclick="closeMenu()">Pricing</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
             </ul>
             <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         </nav>
@@ -28,7 +28,7 @@
         <div class="hero-content">
             <h1>Perfect Look</h1>
             <p>Keep your perfect look with our professional barbers.</p>
-            <a href="#" class="btn">Book Appointment</a>
+            <a href="#contact" class="btn">Book Appointment</a>
         </div>
     </header>
     
@@ -46,7 +46,7 @@
     </div>
 </section>
 
-<section class="services">
+<section class="services" id="services">
     <h2>Our Services</h2>
     <div class="service-cards">
         <div class="card">Haircut & Style</div>
@@ -56,7 +56,7 @@
     </div>
 </section>
 
-<section class="gallery">
+<section class="gallery" id="gallery">
     <h2>Our Works</h2>
     <div class="gallery-grid">
         <img src="work1.jpeg" alt="">
@@ -127,7 +127,7 @@
 </section>
 
 
-<section class="appointment">
+<section class="appointment" id="contact">
     <h2>Book an Appointment</h2>
     <form>
         <input type="text" placeholder="Name">
@@ -145,6 +145,11 @@
     function toggleMenu() {
         const navLinks = document.getElementById('navLinks');
         navLinks.classList.toggle('active');
+    }
+
+    function closeMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.remove('active');
     }
 </script>
 
