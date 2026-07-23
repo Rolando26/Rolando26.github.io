@@ -18,8 +18,8 @@
   --accent-ink: #b53d1c;
   --shadow:     18px 22px 60px -30px rgba(23, 20, 15, .35);
 
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-sans:    "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans:    "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
 
   --wrap: 1200px;
