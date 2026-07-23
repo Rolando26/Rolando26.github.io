@@ -16,7 +16,7 @@
 
   .detail-row {
     display: grid;
-    grid-template-columns: 160px 1fr;
+    grid-template-columns: 160px minmax(0, 1fr);
     gap: 16px;
     padding: 12px 0;
     border-bottom: 1px solid var(--border);
@@ -35,6 +35,8 @@
   .detail-value {
     font-size: 14px;
     color: var(--text);
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
   .timeline {
     list-style: none;

@@ -26,7 +26,7 @@
           <span style="color:var(--text);">Dashboard</span>
         </div>
         <h1 class="page-title">Admin Dashboard</h1>
-        <p class="page-subtitle">Welcome back, ${''}<span id="adminName"></span>. Here's the operational overview.</p>
+        <p class="page-subtitle">Welcome back, <span id="adminName"></span>. Here's the operational overview.</p>
       </div>
     </div>
 
@@ -132,13 +132,13 @@
             <tbody>
               ${pending.map(r => `
                 <tr>
-                  <td style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">#${r.id}</td>
-                  <td style="font-size:12px;color:var(--text-muted);">${fmt.dateTime(r.createdAt)}</td>
-                  <td><strong>${escapeHtml(r.requesterName)}</strong><br><span style="font-size:11px;color:var(--text-muted);">${fmt.unit(r.schoolUnit)}</span></td>
-                  <td>${fmt.date(r.requestDate)}</td>
-                  <td>${fmt.vehicleType(r.vehicleType)}</td>
-                  <td>${escapeHtml(r.activity.length > 35 ? r.activity.slice(0, 35) + '…' : r.activity)}</td>
-                  <td class="actions">
+                  <td data-label="ID" style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">#${r.id}</td>
+                  <td data-label="Submitted" style="font-size:12px;color:var(--text-muted);">${fmt.dateTime(r.createdAt)}</td>
+                  <td data-label="Requester"><strong>${escapeHtml(r.requesterName)}</strong><br><span style="font-size:11px;color:var(--text-muted);">${fmt.unit(r.schoolUnit)}</span></td>
+                  <td data-label="Date Needed">${fmt.date(r.requestDate)}</td>
+                  <td data-label="Vehicle">${fmt.vehicleType(r.vehicleType)}</td>
+                  <td data-label="Activity">${escapeHtml(r.activity.length > 35 ? r.activity.slice(0, 35) + '…' : r.activity)}</td>
+                  <td class="actions" data-label="Quick Action">
                     <button class="btn btn-sm btn-success" onclick="quickApprove(${r.id})">✓ Approve</button>
                     <button class="btn btn-sm btn-danger" onclick="quickReject(${r.id})">Reject</button>
                     <button class="btn btn-sm" onclick="viewRequest(${r.id})">Details</button>
@@ -177,18 +177,18 @@
             <tbody>
               ${filtered.map(r => `
                 <tr>
-                  <td style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">#${r.id}</td>
-                  <td>${fmt.date(r.requestDate)}</td>
-                  <td>${escapeHtml(r.requesterName)}</td>
-                  <td><span style="font-size:11px;color:var(--text-muted);">${fmt.unit(r.schoolUnit)}</span></td>
-                  <td>${fmt.vehicleType(r.vehicleType)}</td>
-                  <td>${escapeHtml(r.activity.length > 30 ? r.activity.slice(0, 30) + '…' : r.activity)}</td>
-                  <td>${r.participants}</td>
-                  <td><span class="badge ${
+                  <td data-label="ID" style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);">#${r.id}</td>
+                  <td data-label="Date">${fmt.date(r.requestDate)}</td>
+                  <td data-label="Requester">${escapeHtml(r.requesterName)}</td>
+                  <td data-label="Unit"><span style="font-size:11px;color:var(--text-muted);">${fmt.unit(r.schoolUnit)}</span></td>
+                  <td data-label="Vehicle">${fmt.vehicleType(r.vehicleType)}</td>
+                  <td data-label="Activity">${escapeHtml(r.activity.length > 30 ? r.activity.slice(0, 30) + '…' : r.activity)}</td>
+                  <td data-label="Pax">${r.participants}</td>
+                  <td data-label="Status"><span class="badge ${
                     r.status === 'approved' ? 'success' :
                     r.status === 'rejected' ? 'danger' : 'warning'
                   }">${fmt.status(r.status)}</span></td>
-                  <td class="actions">
+                  <td class="actions" data-label="Actions">
                     ${r.status === 'approved' ? `<a href="approval-print.html?id=${r.id}" class="btn btn-sm" target="_blank">📄</a>` : ''}
                     <button class="btn btn-sm" onclick="viewRequest(${r.id})">View</button>
                     ${r.status !== 'rejected' ? `<button class="btn btn-sm btn-danger" onclick="deleteRequest(${r.id})" title="Delete">🗑</button>` : ''}
