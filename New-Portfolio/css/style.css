@@ -14,12 +14,12 @@
   --ink-faint:  #8c8478;
   --line:       #ddd5c5;
   --line-strong:#c9bfab;
-  --accent:     #e0522b;
-  --accent-ink: #b53d1c;
+  --accent:     #c9441f;
+  --accent-ink: #a33516;
   --shadow:     18px 22px 60px -30px rgba(23, 20, 15, .35);
 
-  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-sans:    "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans:    "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
 
   --wrap: 1200px;
@@ -37,8 +37,8 @@ html[data-theme="dark"] {
   --ink-faint:  #7d7668;
   --line:       #2c2823;
   --line-strong:#3a352e;
-  --accent:     #f0623b;
-  --accent-ink: #f0623b;
+  --accent:     #e05530;
+  --accent-ink: #e05530;
   --shadow:     18px 22px 60px -30px rgba(0, 0, 0, .7);
 }
 
