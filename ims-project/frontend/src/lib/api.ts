@@ -34,7 +34,7 @@ api.interceptors.response.use(
   (error) => {
     if (axios.isAxiosError(error) && error.response?.status === 401 && getToken()) {
       setToken(null);
-      window.location.assign('/login');
+      window.location.assign('#/login');
     }
     return Promise.reject(error);
   },
